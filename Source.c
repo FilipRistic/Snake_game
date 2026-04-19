@@ -1,3 +1,4 @@
+//Kod radjen u VisualStudio na Windows-u sa Windows header-ima. Nece raditi na Linux-u
 #pragma warning (disable : 6031)  //potrebno jer izbacuje gresku "Return value ignored: 'fscanf' " ,razlog je kompajler verovatno
 #pragma warning (disable : 4996)  //potrebno jer izbacuje gresku za fopen
 #include <stdio.h>
@@ -34,7 +35,7 @@ void snakeInitialization() {
 	Frogs = 0;       //kada je Frogs = 0 menjamo poziciju zabe na ekranu
 	dir = 'd';       //da bi smijica pocela da se krece sama bez da ceka na pritisak taster kada pokrenemo program prvi put
 
-	for (i = 0; i < Head; i++) {
+	for (i = 0; i < Head; i++) {      //postavljanje zmije na sredinu po x i y osi okrenutu na dole
 		Gy++;
 		Field[x][Gy - Head] = i + 1;
 	}
@@ -43,7 +44,7 @@ void snakeInitialization() {
 void print() {
 	for (i = 0; i <= M + 1; i++) {
 		if (i == 0)
-			printf("%c", 201);
+			printf("%c", 201);  //201 je decimalna vrednost za ASCII char znak za ivicu prozora igrice, analogno za ostale
 		else if (i == M + 1)
 			printf("%c", 187);
 		else
@@ -89,10 +90,10 @@ void ResetScreenPosition() {         //potrebna jer ce u suprotnom Game Loop isp
 
 void Random() {             //Za generisanje zabe
 	srand(time(0));         //srand funkciji rand daje random pocetnu vrednost koju mi ovde definisemo funkcijom
-					        //time koja uzima random momenat u vremenu kompjutacije racunara,za ovo nam treba time.h
+					        //time koja uzima random momenat u vremenu komputacije racunara,za ovo nam treba time.h
 					        //biblioteka
 	a = rand() % 20;        //rand() generise broj od 0 do 19 ali nece menjati generisan broj pri svakom pozivu
-					        //Rand funkcije u while-u u main-u,zato koristimo srand
+					        //Random funkcije u while-u u main-u,zato koristimo srand
 	b = rand() % 40;
 
 	if (Frogs == 0 && Field[a][b] == 0) {
@@ -104,9 +105,9 @@ void Random() {             //Za generisanje zabe
 }
 
 int getch_noblock() {
-	if (_kbhit())             //-ako je uneseno nesto sa tastature,nece pauzirati program i cekati da se nesto
+	if (_kbhit())             //ako je uneseno nesto sa tastature,nece pauzirati program i cekati da se nesto
 							  //unese sa tastature kao scanf
-		return _getch();      //-vrati ascii vrednost toga sto je uneseno
+		return _getch();      //vrati ascii vrednost toga sto je uneseno
 	else
 		return -1;
 }
@@ -118,7 +119,7 @@ void GameOver() {             //ova f.-ja mora biti definisana pre f.-je movemen
 
 	if (score > HighScore) {
 		printf("  New HigScore: %d !!!!!!!\n\n",score);
-		system("pause");                      //ceka da koristik pritisne taste da bi se nastavilo
+		system("pause");                      //ceka da koristik pritisne taster da bi se nastavilo
 		f = fopen("highscore.txt", "w");
 		fprintf(f,"%d", score);               //brise ono sto je prethodno bilo zapisano
 		fclose(f);
@@ -147,7 +148,7 @@ void GameOver() {             //ova f.-ja mora biti definisana pre f.-je movemen
 void movement() {                  //ne koristimo scanf ili getcharacter funkcije jer one pauziraju program nakon
 	var = getch_noblock();	       //sto pokupe vrednost sa tastature i drze ga pauziranog dok se ponovo ne 
 							       //unese sa tastature
-	var = tolower(var);	           //konvertuje vrednost var-a u mala slova da ne moramo da brinem oda li je
+	var = tolower(var);	           //konvertuje vrednost var-a u mala slova da ne moramo da brinemo da li je
 							       //CapsLock ukljucen ili ne , w a s d koristimo za kretanje zmijice
 	if ((var == 'a' || var == 'w' || var == 's' || var == 'd') && (abs(dir - var) > 5))
 		                           // && (abs(dir-var)>5)) uvodimo da zmija ne bi isla preko svog tela levo desno
