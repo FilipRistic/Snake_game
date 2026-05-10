@@ -33,7 +33,7 @@ void snakeInitialization() {
 
 	x = N / 2, y = M / 2, Gy = y, Head = 5, Tail = 1, Game = 0, score = 0, Speed = 120;
 	Frogs = 0;       //kada je Frogs = 0 menjamo poziciju zabe na ekranu
-	dir = 'd';       //da bi smijica pocela da se krece sama bez da ceka na pritisak taster kada pokrenemo program prvi put
+	dir = 'd';       //da bi zmijica pocela da se krece sama bez da ceka na pritisak tastera kada pokrenemo program prvi put
 
 	for (i = 0; i < Head; i++) {      //postavljanje zmije na sredinu po x i y osi okrenutu na dole
 		Gy++;
